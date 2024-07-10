@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Login Corner</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+     {% load static %}
+     <link rel="stylesheet" href="{% static "users/css/style.css" %}">
+</head>
+<body>
+
+    {% if messages %}
+    <ul class="messages bg-info text-white text-center">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="container">
+        <div class="header">
+            <h1 class="text-center m-5">Hospital Login Corner</h1>
+        </div>
+        <div class="main">
+            <div class="doctor border border-info rounded" onclick="window.location.href='doctor'">
+                <h2 class=" font-weight-bold ">Doctor Login</h2>
+            </div>
+            <div class="patient border border-info  rounded" onclick="window.location.href='patient'">
+                <h2 class="font-weight-bold">Patient Login</h2>
+            </div>
+        </div>
+      
+        
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
