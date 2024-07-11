@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.contrib import messages
 from .models import Doctor, Patient
+from django.urls import reverse
 
 # Create your views here.
 def index(request):
@@ -85,8 +86,12 @@ def doctor_login(request):
         try:
             doctor = Doctor.objects.get(Email=Email)
             if doctor.Password == Password:
+                user = Doctor.objects.all()
+                context={
+                    'user':user,
+                }
                 messages.success(request, "Doctor Login Successfully")
-                return redirect('index')
+                return render(request, 'users/dashboard.html', context)
             else:
                 messages.success(request, "Invalid Credentials")
                 return redirect('doctor')
@@ -104,8 +109,12 @@ def patient_login(request):
         try:
             patient = Patient.objects.get(Email=Email)
             if patient.Password == Password:
+                user = Patient.objects.all()
+                context={
+                    'user':user,
+                }
                 messages.success(request, "Patient Login Successfully")
-                return redirect('index')
+                return render(request, 'users/dashboard.html', context)
             else:
                 messages.success(request, "Invalid Credentials")
                 return redirect('patient')
@@ -115,3 +124,5 @@ def patient_login(request):
 
     return render(request, 'users/patient.html')
     
+def dashboard(request):
+    return render(request, 'users/dashboard.html')

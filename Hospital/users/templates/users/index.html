@@ -9,7 +9,6 @@
      <link rel="stylesheet" href="{% static "users/css/style.css" %}">
 </head>
 <body>
-
     {% if messages %}
     <ul class="messages bg-info text-white text-center">
       {% for message in messages %}
@@ -22,10 +21,10 @@
             <h1 class="text-center m-5">Hospital Login Corner</h1>
         </div>
         <div class="main">
-            <div class="doctor border border-info rounded" onclick="window.location.href='doctor'">
+            <div class="doctor border border-info" onclick="window.location.href='doctor'">
                 <h2 class=" font-weight-bold ">Doctor Login</h2>
             </div>
-            <div class="patient border border-info  rounded" onclick="window.location.href='patient'">
+            <div class="patient border border-info" onclick="window.location.href='patient'">
                 <h2 class="font-weight-bold">Patient Login</h2>
             </div>
         </div>
@@ -33,6 +32,8 @@
         
     </div>
 
+
+    
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
