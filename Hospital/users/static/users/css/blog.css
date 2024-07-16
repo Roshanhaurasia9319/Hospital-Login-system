@@ -1,0 +1,52 @@
+
+    body {
+        background-color: #f8f9fa;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-weight: bolder;
+        font-size: 3rem;
+        font-family:Verdana, Geneva, Tahoma, sans-serif ;
+    }
+
+    .card-header {
+        background: linear-gradient(45deg, #00ff22, #00ffea);
+        color: white;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .card-header:hover {
+        background: linear-gradient(45deg, #00ff37, #1ef8ff);
+    }
+
+    .btn-link {
+        color: white;
+        font-size: 1.2rem;
+        text-decoration: none;
+    }
+
+    .btn-link:hover {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .card-body img {
+        display: block;
+        margin: 20px auto;
+        border-radius: 50%;
+    }
+
+    .card-body p {
+        text-align: center;
+    }
+
+    .card {
+        transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+    }

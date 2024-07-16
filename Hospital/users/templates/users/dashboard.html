@@ -5,63 +5,120 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static "users/css/blog.css" %}">
 </head>
 <body>
 
     {% if messages %}
     <ul class="messages bg-info text-white text-center">
-      {% for message in messages %}
-      <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
         {% endfor %}
     </ul>
     {% endif %}
 
-<div class="container mt-5">
-    <h2 class="mb-4">Doctor Dashboard</h2>
-    <div class="table-responsive">
-        <table class="table table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Profile Picture</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Password</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">City</th>
-                    <th scope="col">State</th>
-                    <th scope="col">Pincode</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for user in user %}
-                <tr>
-                    <td>{{ user.FirstName }}</td>
-                    <td>{{ user.LastName }}</td>
-                    <td>
-                        {% if user.ProfilePicture %}
-                            <img src="{{ user.ProfilePicture.url }}" alt="Profile Picture" class="img-thumbnail" style="max-width: 100px;">
-                        {% else %}
-                            No image
-                        {% endif %}
-                    </td>
-                    <td>{{ user.Username }}</td>
-                    <td>{{ user.Email }}</td>
-                    <td>{{ user.Password }}</td>
-                    <td>{{ user.Address }}</td>
-                    <td>{{ user.City }}</td>
-                    <td>{{ user.State }}</td>
-                    <td>{{ user.Pincode }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <div class="container mt-5">
+        <h2 class="mb-4">Doctor Dashboard</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th scope="row">First Name</th>
+                        <td>{{ user.FirstName }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Last Name</th>
+                        <td>{{ user.LastName }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Profile Picture</th>
+                        <td>
+                            {% if user.ProfilePicture %}
+                                <img src="{{ user.image.url }}" alt="Profile Picture" class="img-thumbnail" style="max-width: 100px; border-radius: 50%;">
+                            {% else %}
+                                No image
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Username</th>
+                        <td>{{ user.Username }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Email</th>
+                        <td>{{ user.Email }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Password</th>
+                        <td>{{ user.Password }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Address</th>
+                        <td>{{ user.Address }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">City</th>
+                        <td>{{ user.City }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">State</th>
+                        <td>{{ user.State }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Pincode</th>
+                        <td>{{ user.Pincode }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <div class="container mt-5">
+        <h1>Your Blogs</h1>
+        <div class="accordion" id="blogAccordion">
+            {% if blogs %}
+            {% for blog in blogs %}
+            <div class="card m-3 border border-success" style="border-radius: 20px;">
+                <div class="card-header" id="heading{{ blog.id }}" style="border-radius: 20px;">
+                    <h2 class="mb-0 text-center">
+                        <button class="btn btn-link text-white" type="button" data-toggle="collapse" data-target="#collapse{{ blog.id }}" aria-expanded="true" aria-controls="collapse{{ blog.id }}">
+                            {{ blog.title }}
+                        </button>
+                        {% if blog.status %}
+                        <p class="bg-white text-dark border rounded" style="width: 7vw; font-size: medium;">PUBLISHED</p>
+                        {% else %}
+                        <p class="bg-white text-dark border rounded" style="width: 7vw; font-size: medium;">DRAFT</p>
+                        {% endif %}
+                    </h2>
+                </div>
+
+                <div id="collapse{{ blog.id }}" class="collapse" aria-labelledby="heading{{ blog.id }}" data-parent="#blogAccordion">
+                    <div class="card-body">
+                        <img src="{{ blog.image.url }}" alt="{{ blog.title }}" height="100" width="100">
+                        <p><strong>Posted By:</strong> {{ blog.doctor.Email }}</p>
+                        <p><strong>Category:</strong> {{ blog.category.name }}</p>
+                        <p><strong>Summary:</strong> {{ blog.summary }}</p>
+                        <p>{{ blog.content }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+                 <p class="text-center text-danger font-weight-bold">!!---------------You Do Not Post Anything Yet-------------!!</p>
+            {% endif %}
+           
+        </div>
+    </div>
+
+
+    <div class="btn m-auto">
+        <button type="button" class="btn btn-success" onclick="window.location.href='AddBlog'">ADD BLOG----></button>
+    </div>
+    
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

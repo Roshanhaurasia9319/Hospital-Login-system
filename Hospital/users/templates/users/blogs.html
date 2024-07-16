@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs</title>
+    
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static "users/css/blog.css" %}">
+</head>
+<body style="background-color: #8cdefaa1;">
+
+    <div class="container mt-5">
+        <h1>Read Blogs</h1>
+        <div class="accordion" id="blogAccordion">
+            {% for blog in blogs %}
+            <div class="card m-3 border border-success" style="border-radius: 20px;">
+                <div class="card-header" id="heading{{ blog.id }}" style="border-radius: 20px;">
+                    <h2 class="mb-0 text-center">
+                        <button class="btn btn-link text-white" type="button" data-toggle="collapse" data-target="#collapse{{ blog.id }}" aria-expanded="true" aria-controls="collapse{{ blog.id }}">
+                            {{ blog.title }}
+                        </button>
+                    </h2>
+                </div>
+
+                <div id="collapse{{ blog.id }}" class="collapse" aria-labelledby="heading{{ blog.id }}" data-parent="#blogAccordion">
+                    <div class="card-body">
+                        <img src="{{ blog.image.url }}" alt="{{ blog.title }}" height="100" width="100">
+                        <p><strong>Posted By:</strong> {{ blog.doctor.Email }}</p>
+                        <p><strong>Category:</strong> {{ blog.category.name }}</p>
+                        <p><strong>Summary:</strong> {{ blog.summary }}</p>
+                        <p>{{ blog.content }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

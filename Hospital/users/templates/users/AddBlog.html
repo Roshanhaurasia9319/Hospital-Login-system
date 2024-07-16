@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Doctor Blog</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static "users/css/form.css" %}">
+</head>
+<body>
+
+    {% if messages %}
+    <ul class="messages bg-info text-white text-center">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+<div class="container mt-5">
+    <div class="form-container">
+        <div id="blogForm">
+            <h1 class="text-center">Doctor Blog</h1>
+            <h2 class="text-center">Create Blog</h2>
+            <form method="POST" action="{% url 'add_doctor_blog' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="doctor">Doctor</label>
+                    <select class="form-control" id="doctor" name="doctor" required>
+                        {% for doctor in doctors %}
+                        <option value="{{ doctor.Email }}">{{ doctor.Email }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <input type="file" class="form-control" id="image" name="image" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select class="form-control" id="category" name="category" required>
+                        {% for category in categories %}
+                        <option value="{{ category.id }}">{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="summary">Summary</label>
+                    <textarea class="form-control" id="summary" name="summary" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="content">Content</label>
+                    <textarea class="form-control" id="content" name="content" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select class="form-control" id="status" name="status" required>
+                        <option value="0">Draft</option>
+                        <option value="1">Published</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'users/js/script.js' %}"></script>
+</body>
+</html>
