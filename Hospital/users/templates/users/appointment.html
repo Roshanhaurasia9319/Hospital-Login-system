@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Your Appointment</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static "users/css/form.css" %}">
+</head>
+<body>
+
+    {% if messages %}
+    <ul class="messages bg-info text-white text-center">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <div class="container mt-5">
+        <div class="form-container">
+            <div id="blogForm">
+                <h1 class="text-center">Schedule Your Appointment with Dr. {{ doctor.FirstName }} {{ doctor.LastName }}</h1>
+                <form method="POST" action="{% url 'book_appointment'  doctor.Email   %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <label for="Speciality">Speciality</label>
+                        <input type="text" class="form-control" name="Speciality" id="Speciality" placeholder="{{doctor.Speciality}}" readonly>
+                    </div>
+                    <p>{{doctor.Speciality}}</p>
+
+                    <div class="form-group">
+                        <label for="Date">Date Of Appointment</label>
+                        <input type="date" class="form-control" name="Date" id="Date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="Time">Appointment Time</label>
+                        <input type="time" class="form-control" name="Time" id="Time" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'users/js/script.js' %}"></script>
+</body>
+</html>

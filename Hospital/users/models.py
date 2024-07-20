@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Doctor(models.Model):
+    Did=models.IntegerField(unique=True)
     FirstName = models.CharField(max_length=50)
     LastName = models.CharField(max_length=50)
     ProfilePicture = models.ImageField(upload_to='images/', default=None)
@@ -12,6 +13,7 @@ class Doctor(models.Model):
     City = models.CharField(max_length=50, default=None)
     State = models.CharField(max_length=50, default=None)
     Pincode = models.CharField(max_length=10, default=None)
+    Speciality = models.CharField(max_length=100, default=None)
 
     def __str__(self):
         return self.Email
@@ -61,6 +63,10 @@ class DoctorBlog(models.Model):
     
     
   
-    
-    
+class Appointment(models.Model):
+    Speciality = models.CharField(max_length=500)
+    Date = models.DateField(auto_now=False, auto_now_add=False)
+    Time = models.TimeField()
+    def __str__(self):
+        return f"{self.Speciality} on {self.Date} at {self.Time}"
     

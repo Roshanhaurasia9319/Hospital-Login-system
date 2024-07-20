@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static "users/css/blog.css" %}">
+</head>
+<body>
+
+    {% if messages %}
+    <ul class="messages bg-info text-white text-center">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <div class="container mt-5">
+        <h2 class="mb-4">Patient Dashboard</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th scope="row">First Name</th>
+                        <td>{{ user.FirstName }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Last Name</th>
+                        <td>{{ user.LastName }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Profile Picture</th>
+                        <td>
+                            {% if user.ProfilePicture %}
+                                <img src="{{ user.ProfilePicture.url }}" alt="Profile Picture" class="img-thumbnail" style="max-width: 100px; border-radius: 50%;" height="50" width="50">
+                            {% else %}
+                                No image
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Username</th>
+                        <td>{{ user.Username }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Email</th>
+                        <td>{{ user.Email }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Password</th>
+                        <td>{{ user.Password }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Address</th>
+                        <td>{{ user.Address }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">City</th>
+                        <td>{{ user.City }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">State</th>
+                        <td>{{ user.State }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Pincode</th>
+                        <td>{{ user.Pincode }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+    <div class="container mt-5">  
+        <h2 class="mb-4">List of Doctors</h2>
+        <div class="list-group">
+            {% for doctor in doctors  %}
+            <div class="list-group-item d-flex align-items-center">
+                <img src="{{ doctor.ProfilePicture.url }}" alt="Doctor Image" class="rounded-circle mr-3" height="50" width="50">
+                <div class="flex-grow-1">
+                    <h5 class="mb-1">{{doctor.FirstName }} {{doctor.LastName}}</h5>
+                </div>
+                <a href="appointment/{{ doctor.Email }}"><button type="button" class="btn btn-primary">Book Appointment</button></a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+  
+
+
+    
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -18,17 +18,32 @@
     {% endif %}
     <div class="container">
         <div class="header">
-            <h1 class="text-center m-5">Hospital Login Corner</h1>
+            {% comment %} <h1 class="text-center m-5">Hospital Login Corner</h1> {% endcomment %}
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#">Hospital Login Corner</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item p-2">
+                           <a href="doctor"><button type="button" class="btn btn-success">Doctor Login</button></a>
+                        </li>
+                        <li class="nav-item p-2">
+                            <a href="patient"><button type="button" class="btn btn-primary">Patient Login</button></a>
+                        </li>
+                    
+                    </ul>
+                </div>
+            </nav>
+        
         </div>
         <div class="main">
-            <div class="doctor border border-info" onclick="window.location.href='doctor'">
-                <h2 class=" font-weight-bold ">Doctor Login</h2>
+            <div class="blogs border border-info" onclick="window.location.href='blogs'">
+                <h2 class=" font-weight-bold ">Read Blog</h2>
             </div>
             <div class="patient border border-info" onclick="window.location.href='patient'">
-                <h2 class="font-weight-bold">Patient Login</h2>
-            </div>
-            <div class="blogs border border-info" onclick="window.location.href='blogs'">
-                <h2 class="font-weight-bold">Read Blogs</h2>
+                <h2 class="font-weight-bold">Book Appoinment</h2>
             </div>
         </div>
       

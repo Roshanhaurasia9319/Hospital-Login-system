@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Doctor, Patient, DoctorBlog, Category
+from .models import Doctor, Patient, DoctorBlog, Category, Appointment
 
 # Register your models here.
 # admin.site.register(Doctor)
@@ -18,6 +18,7 @@ class DoctorBlogAdmin(admin.ModelAdmin):
     search_fields=['title', 'content']
     
 
-
 admin.site.register(DoctorBlog, DoctorBlogAdmin)
 admin.site.register(Category)
+
+admin.site.register(Appointment)
